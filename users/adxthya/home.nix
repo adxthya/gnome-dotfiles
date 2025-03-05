@@ -10,8 +10,16 @@
     ../../modules
   ];
 
+  # fzf Bash intergration
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   home.packages = with pkgs;[
-    stow
+    fzf
+    neovim
+    veracrypt
     obsidian
     vlc
     vscode-fhs
@@ -19,7 +27,6 @@
     telegram-desktop
     vesktop
     unstable.freetube
-    python313
     chromium
     qbittorrent
     unstable.arduino-ide    
