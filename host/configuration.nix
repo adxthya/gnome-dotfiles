@@ -51,7 +51,7 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      stdenv
+      stdenv.cc.cc.lib
       libgcc
       libllvm
       portaudio # Here it is!
@@ -106,7 +106,14 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.gnome = {
+    enable = true;
+#   extraGSettingsOverridePackages = [ pkgs.mutter ];
+#   extraGSettingsOverrides = ''
+#     [org.gnome.mutter]
+#     experimental-features=['scale-monitor-framebuffer']
+#   '';
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -154,7 +161,7 @@
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -168,6 +175,10 @@
   git
   home-manager
   android-studio
+  (writeShellScriptBin "python" ''
+    export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH
+    exec ${pkgs.python3}/bin/python "$@"
+  '')
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -17,12 +17,16 @@
   };
 
   home.packages = with pkgs;[
+    zed-editor
+    vscode-fhs
+    librewolf
+    bitwarden
+    vivaldi
     fzf
     neovim
     veracrypt
     obsidian
     vlc
-    vscode-fhs
     protonvpn-gui
     telegram-desktop
     vesktop
